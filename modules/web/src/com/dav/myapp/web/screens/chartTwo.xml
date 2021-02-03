@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://chart.caption"
+        messagesPack="com.dav.myapp.web.screens"
+        xmlns:chart="http://schemas.haulmont.com/charts/charts.xsd">
+    <data readOnly="true">
+        <keyValueCollection id="keyOrgDc">
+            <loader id="salesDl">
+                <query>
+                    <![CDATA[select o.shortNameOrganization, count(o.email) from myapp_RequestToOrganization o group by o.shortNameOrganization]]>
+                </query>
+            </loader>
+            <properties>
+                <property name="name" class="com.dav.myapp.entity.Organization"/>
+                <property name="sum" datatype="decimal"/>
+            </properties>
+        </keyValueCollection>
+    </data>
+    <layout>
+        <chart:pieChart id="pieChart"
+                        dataContainer="keyOrgDc"
+                        height="100%"
+                        titleField="name"
+                        valueField="sum"
+                        width="100%"/>
+    </layout>
+</window>

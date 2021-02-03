@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://requestToOrganizationEdit.caption"
+        focusComponent="form"
+        messagesPack="com.dav.myapp.web.screens.requesttoorganization">
+    <data>
+        <instance id="requestToOrganizationDc"
+                  class="com.dav.myapp.entity.RequestToOrganization">
+            <view extends="_local">
+                <property name="organization" view="_minimal">
+                    <property name="nameOrganization"/>
+                    <property name="email"/>
+                    <property name="phoneNumber"/>
+                </property>
+                <property name="mailingList" view="_minimal"/>
+            </view>
+            <loader/>
+            <collection id="mailingListDc" property="mailingList"/>
+        </instance>
+        <collection id="organizationsDc" class="com.dav.myapp.entity.Organization" view="_minimal">
+            <loader id="organizationsDl">
+                <query>
+                    <![CDATA[select e from myapp_Organization e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="AUTO"
+                width="AUTO"
+                modal="true"
+                forceDialog="true"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="requestToOrganizationDc">
+            <column width="350px">
+                <textField id="numberOfRequestField" property="numberOfRequest"/>
+                <lookupPickerField id="organizationField" optionsContainer="organizationsDc" captionProperty="nameOrganization" property="organization">
+                    <actions>
+                        <action id="lookup" type="picker_lookup"/>
+                        <action id="open" type="picker_open"/>
+                    </actions>
+                </lookupPickerField>
+                <textArea id="textBodyOfRequestField" property="textBodyOfRequest" rows="5"/>
+            </column>
+        </form>
+        <groupBox id="mailingListBox" caption="msg://com.dav.myapp.entity/RequestToOrganization.mailingList">
+            <table id="mailingListTable" dataContainer="mailingListDc" width="100%" height="200px">
+                <actions>
+                    <action id="add" type="add"/>
+                    <action id="exclude" type="exclude"/>
+                </actions>
+                <columns>
+                    <column id="login"/>
+                    <column id="name"/>
+                </columns>
+                <buttonsPanel>
+                    <button action="mailingListTable.add"/>
+                    <button action="mailingListTable.exclude"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

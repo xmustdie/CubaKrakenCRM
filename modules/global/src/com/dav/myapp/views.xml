@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<views xmlns="http://schemas.haulmont.com/cuba/view.xsd">
+
+    <view entity="myapp_RequestToOrganization" name="requestToOrganization-browseView">
+        <property name="numberOfRequest"/>
+        <property name="organization" view="_minimal">
+            <property name="nameOrganization"/>
+            <property name="shortNameOrganization"/>
+        </property>
+        <property name="textBodyOfRequest"/>
+    </view>
+    <view entity="myapp_RequestToOrganization" name="requestToOrganization-browseViewShort">
+        <property name="numberOfRequest"/>
+        <property name="organization" view="_minimal">
+            <property name="nameOrganization"/>
+            <property name="email"/>
+            <property name="phoneNumber"/>
+        </property>
+    </view>
+</views>

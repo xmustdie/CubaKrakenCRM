@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://organizationEdit.caption"
+        focusComponent="form"
+        messagesPack="com.dav.myapp.web.screens.organization">
+    <data>
+        <instance id="organizationDc"
+                  class="com.dav.myapp.entity.Organization"
+                  view="_local">
+            <loader/>
+        </instance>
+    </data>
+    <dialogMode height="AUTO"
+                width="AUTO"
+                modal="true"
+                forceDialog="true"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="organizationDc">
+            <column width="350px">
+                <textField id="nameOrganizationField" property="nameOrganization"/>
+                <textField id="shortNameOrganizationField" property="shortNameOrganization"/>
+                <textField id="emailField" property="email">
+                    <validators>
+                        <regexp regexp="^[A-Za-z0-9+_.-]+@(.+)$" message="Введите корректный емейл"/>
+                        <notBlank message="Заполните поле е-мейл"/>
+                    </validators>
+                </textField>
+                <maskedField id="phoneNumberField" property="phoneNumber" mask="+7 (###) ###-##-##" valueMode="masked"/>
+                <lookupField id="taxesTypeOrganizationField" property="taxesTypeOrganization"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+            <button id="commitBtn" action="windowCommit"/>
+        </hbox>
+    </layout>
+</window>

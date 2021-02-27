@@ -10,14 +10,13 @@
                 <property name="organization" view="_minimal">
                     <property name="nameOrganization"/>
                     <property name="email"/>
-                    <property name="phoneNumber"/>
                 </property>
                 <property name="mailingList" view="_minimal"/>
             </view>
             <loader/>
             <collection id="mailingListDc" property="mailingList"/>
         </instance>
-        <collection id="organizationsDc" class="com.dav.myapp.entity.Organization" view="_minimal">
+        <collection id="organizationsDc" class="com.dav.myapp.entity.Organization" view="_base" >
             <loader id="organizationsDl">
                 <query>
                     <![CDATA[select e from myapp_Organization e]]>
@@ -26,30 +25,34 @@
         </collection>
     </data>
     <dialogMode height="AUTO"
-                width="AUTO"
+                width="30%"
                 modal="true"
                 forceDialog="true"/>
-    <layout expand="editActions" spacing="true">
-        <form id="form" dataContainer="requestToOrganizationDc">
-            <column width="350px">
+    <layout expand="mailingListBox" spacing="true" width="100%">
+        <form id="form" dataContainer="requestToOrganizationDc" width="100%">
+            <column width="100%">
                 <textField id="numberOfRequestField" property="numberOfRequest"/>
-                <lookupPickerField id="organizationField" optionsContainer="organizationsDc" captionProperty="nameOrganization" property="organization">
+                <lookupPickerField
+                                   optionsContainer="organizationsDc"  property="organization"
+                captionProperty="nameOrganization" width="100%">
                     <actions>
                         <action id="lookup" type="picker_lookup"/>
                         <action id="open" type="picker_open"/>
                     </actions>
                 </lookupPickerField>
                 <textArea id="textBodyOfRequestField" property="textBodyOfRequest" rows="5"/>
+                <checkBox id="isCanceledField" property="isCanceled" editable="false"/>
             </column>
         </form>
-        <groupBox id="mailingListBox" caption="msg://com.dav.myapp.entity/RequestToOrganization.mailingList">
+        <groupBox id="mailingListBox" caption="msg://com.dav.myapp.entity/RequestToOrganization.mailingList"
+                  width="100%">
             <table id="mailingListTable" dataContainer="mailingListDc" width="100%" height="200px">
                 <actions>
                     <action id="add" type="add"/>
                     <action id="exclude" type="exclude"/>
                 </actions>
                 <columns>
-                    <column id="login"/>
+                    <!--<column id="login"/>-->
                     <column id="name"/>
                 </columns>
                 <buttonsPanel>

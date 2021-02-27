@@ -23,9 +23,8 @@ public class RequestToOrganization extends StandardEntity {
     private Long numberOfRequest;
 
     @JoinColumn(name = "ORGANIZATION_ID")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(DeletePolicy.UNLINK)
-    @NotNull
     @Lookup(type = LookupType.DROPDOWN, actions = {"lookup", "open"})
     @OnDeleteInverse(DeletePolicy.DENY)
     private Organization organization;
@@ -40,6 +39,18 @@ public class RequestToOrganization extends StandardEntity {
     @OnDelete(DeletePolicy.UNLINK)
     @ManyToMany
     private List<User> mailingList;
+
+    @Column(name = "IS_CANCELED")
+    @NotNull
+    private Boolean isCanceled;
+
+    public void setIsCanceled(Boolean isCanceled) {
+        this.isCanceled = isCanceled;
+    }
+
+    public Boolean getIsCanceled() {
+        return isCanceled;
+    }
 
     public List<User> getMailingList() {
         return mailingList;

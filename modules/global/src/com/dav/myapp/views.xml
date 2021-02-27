@@ -8,6 +8,7 @@
             <property name="shortNameOrganization"/>
         </property>
         <property name="textBodyOfRequest"/>
+        <property name="isCanceled"/>
     </view>
     <view entity="myapp_RequestToOrganization" name="requestToOrganization-browseViewShort">
         <property name="numberOfRequest"/>
@@ -16,5 +17,6 @@
             <property name="email"/>
             <property name="phoneNumber"/>
         </property>
+        <property name="isCanceled"/>
     </view>
 </views>

@@ -9,7 +9,6 @@ import com.haulmont.cuba.gui.Notifications;
 import com.haulmont.cuba.gui.components.Action;
 import com.haulmont.cuba.gui.components.ContentMode;
 import com.haulmont.cuba.gui.components.Table;
-import com.haulmont.cuba.gui.model.CollectionContainer;
 import com.haulmont.cuba.gui.model.CollectionLoader;
 import com.haulmont.cuba.gui.screen.*;
 import org.slf4j.Logger;

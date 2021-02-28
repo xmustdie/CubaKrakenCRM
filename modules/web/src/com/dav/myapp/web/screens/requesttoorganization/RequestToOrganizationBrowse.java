@@ -44,12 +44,12 @@ public class RequestToOrganizationBrowse extends StandardLookup<RequestToOrganiz
 
     @Subscribe("requestToOrganizationsTable.makeCanceled")
     public void onRequestToOrganizationsTableMakeCanceled(Action.ActionPerformedEvent event) {
-        RequestToOrganization request = requestToOrganizationsTable.getSingleSelected();
+        RequestToOrganization requestToOrganization = requestToOrganizationsTable.getSingleSelected();
         String myCaption;
         String myDescription;
-        if (request != null && request.getIsCanceled() != null && !request.getIsCanceled()) {
-            request.setIsCanceled(true);
-            dataManager.commit(request);
+        if (requestToOrganization != null && requestToOrganization.getIsCanceled() != null && !requestToOrganization.getIsCanceled()) {
+            requestToOrganization.setIsCanceled(true);
+            dataManager.commit(requestToOrganization);
             requestToOrganizationsDl.load();
             myCaption = "Операция выполнена";
             myDescription = "Запрос отменён";

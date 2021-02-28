@@ -13,7 +13,7 @@
                 </property>
                 <property name="mailingList" view="_minimal"/>
             </view>
-            <loader/>
+            <loader id="requestOrganizationDl"/>
             <collection id="mailingListDc" property="mailingList"/>
         </instance>
         <collection id="organizationsDc" class="com.dav.myapp.entity.Organization" view="_base" >
@@ -64,6 +64,8 @@
         <hbox id="editActions" spacing="true">
             <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
             <button id="closeBtn" action="windowClose"/>
+            <button id="commitBtn" action="windowCommit"/>
+            <button id="saveAndSendBtn" caption="msg://requestToOrganizationEdit.saveAndSendBtn.caption"/>
         </hbox>
     </layout>
 </window>

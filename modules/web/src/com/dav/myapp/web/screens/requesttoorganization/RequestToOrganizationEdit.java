@@ -1,7 +1,12 @@
 package com.dav.myapp.web.screens.requesttoorganization;
 
+import com.haulmont.cuba.core.app.EmailService;
 import com.haulmont.cuba.core.app.UniqueNumbersService;
+import com.haulmont.cuba.core.global.EmailException;
+import com.haulmont.cuba.core.global.EmailInfo;
+import com.haulmont.cuba.core.global.EmailInfoBuilder;
 import com.haulmont.cuba.gui.Notifications;
+import com.haulmont.cuba.gui.components.Button;
 import com.haulmont.cuba.gui.screen.*;
 import com.dav.myapp.entity.RequestToOrganization;
 import org.slf4j.Logger;
@@ -22,6 +27,9 @@ public class RequestToOrganizationEdit extends StandardEditor<RequestToOrganizat
     @Inject
     private UniqueNumbersService uniqueNumbersService;
 
+    @Inject
+    private EmailService emailService;
+
     @Subscribe
     protected void onBeforeCommit(BeforeCommitChangesEvent event) {
         // ToDo - разобраться с инициализацией MySequence
@@ -36,5 +44,29 @@ public class RequestToOrganizationEdit extends StandardEditor<RequestToOrganizat
             log.info("Request got autoincrement number {}", autoRequestNumber);
             getEditedEntity().setNumberOfRequest(autoRequestNumber);
         }
+    }
+
+    @Subscribe("saveAndSendBtn")
+    public void onSaveAndSendBtnClick(Button.ClickEvent event) {
+        commitChanges();
+        RequestToOrganization requestToOrganization = getEditedEntity();
+        String address = requestToOrganization.getOrganization().getEmail();
+        String caption = String.format("Запрос в организацию № %d", requestToOrganization.getNumberOfRequest());
+        EmailInfo emailInfo = EmailInfoBuilder.create()
+                .setAddresses(address)
+                .setBody(requestToOrganization.getTextBodyOfRequest())
+                .setCaption(caption)
+                .build();
+        try {
+            emailService.sendEmail(emailInfo);
+        } catch (EmailException e) {
+            log.info("email sending failed - {} ", e.getMessages());
+            return;
+        }
+        notifications.create()
+                .withHideDelayMs(4000)
+                .withCaption("Запрос успешно отправлен")
+                .withType(Notifications.NotificationType.TRAY)
+                .show();
     }
 }

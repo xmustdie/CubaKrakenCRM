@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://statistics.caption"
+        messagesPack="com.dav.myapp.web.screens"
+        xmlns:dashboard="http://schemas.haulmont.com/cubadshb/ui-component.xsd">
+    <layout>
+            <dashboard:dashboard id="mainDashboard"
+                                 code="main-dashboard"
+                                 width="100%">
+            </dashboard:dashboard>
+    </layout>
+</window>

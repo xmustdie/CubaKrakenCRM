@@ -45,18 +45,23 @@ public class RequestToOrganizationBrowse extends StandardLookup<RequestToOrganiz
     @Subscribe("requestToOrganizationsTable.makeCanceled")
     public void onRequestToOrganizationsTableMakeCanceled(Action.ActionPerformedEvent event) {
         RequestToOrganization request = requestToOrganizationsTable.getSingleSelected();
-        if (request != null) {
-            boolean check = request.getIsCanceled() != null && request.getIsCanceled();
-            request.setIsCanceled(!check);
+        String myCaption;
+        String myDescription;
+        if (request != null && request.getIsCanceled() != null && !request.getIsCanceled()) {
+            request.setIsCanceled(true);
             dataManager.commit(request);
             requestToOrganizationsDl.load();
+            myCaption = "Операция выполнена";
+            myDescription = "Запрос отменён";
+        } else {
+            myCaption = "Предупреждение";
+            myDescription = "Невозможно отменить запрос повторно";
         }
-        String orgName = request.getOrganization().getNameOrganization();
         notifications.create()
-                .withCaption(orgName)
+                .withCaption(myCaption)
                 .withHideDelayMs(3000)
                 .withType(Notifications.NotificationType.TRAY)
-                .withDescription("Запрос отменён")
+                .withDescription(myDescription)
                 .show();
     }
 
@@ -67,7 +72,6 @@ public class RequestToOrganizationBrowse extends StandardLookup<RequestToOrganiz
                 .map(listMember -> "<center>" + listMember + "</center><br>")
                 .collect(Collectors.joining());
         log.info(dialogMessage);
-
         dialogs.createMessageDialog()
                 .withCaption("Участники списка рассылки")
                 .withMessage(dialogMessage)

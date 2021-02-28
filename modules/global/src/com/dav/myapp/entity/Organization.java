@@ -5,7 +5,6 @@ import com.haulmont.cuba.core.entity.StandardEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -23,9 +22,7 @@ public class Organization extends StandardEntity {
     private String shortNameOrganization;
 
     @Column(name = "EMAIL", length = 50)
-    @NotBlank
     @NotEmpty
-    @NotNull
     private String email;
 
     @Column(name = "PHONE_NUMBER", length = 50)

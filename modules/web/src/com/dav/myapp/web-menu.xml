@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
     <menu id="application-myapp" insertBefore="administration" caption="mainMsg://menu_config.application-myapp">
+        <item screen="myapp_Statistics" caption="mainMsg://menu_config.myapp_Statistics"/>
         <item screen="myapp_Organization.browse" caption="mainMsg://menu_config.myapp_Organization.browse"/>
         <item screen="myapp_RequestToOrganization.browse"
               caption="mainMsg://menu_config.myapp_RequestToOrganization.browse"/>
-<!--        <item screen="myapp_Chart" caption="mainMsg://menu_config.myapp_Chart"/>-->
     </menu>
     <menu id="statistics" insertBefore="administration" caption="mainMsg://menu_config.application-myapp">
-
     </menu>
 </menu-config>

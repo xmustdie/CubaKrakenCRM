@@ -33,7 +33,7 @@ public class RequestToOrganizationEdit extends StandardEditor<RequestToOrganizat
                     .withDescription("Запросу автоматически присвоен номер: " + autoRequestNumber)
                     .withType(Notifications.NotificationType.TRAY)
                     .show();
-            log.info(String.valueOf(autoRequestNumber));
+            log.info("Request got autoincrement number {}", autoRequestNumber);
             getEditedEntity().setNumberOfRequest(autoRequestNumber);
         }
     }

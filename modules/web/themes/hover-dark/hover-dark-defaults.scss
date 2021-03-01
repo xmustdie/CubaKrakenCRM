@@ -1,9 +1,9 @@
 @import "../hover/hover-defaults";
 
-$v-app-background-color: #262626;
-$v-background-color: lighten($v-app-background-color, 12%);
+$v-app-background-color: #282830;
+$v-background-color: lighten($v-app-background-color, 20%);
 $v-border: 1px solid (v-tint 0.8);
-$font-color: valo-font-color($v-background-color, 0.85);
+$font-color: valo-font-color($v-background-color, 0.95);
 $v-button-font-color: $font-color;
 $v-font-color: $font-color;
 $v-link-font-color: lighten($v-focus-color, 15%);
@@ -16,4 +16,4 @@ $cuba-menubar-background-color: lighten($v-app-background-color, 4%);
 $cuba-tabsheet-tab-caption-selected-color: $v-font-color;
 $cuba-window-modal-header-background: $v-background-color;
 
-$cuba-menubar-menuitem-border-radius: 0;
+$cuba-menubar-menuitem-border-radius: 5;
